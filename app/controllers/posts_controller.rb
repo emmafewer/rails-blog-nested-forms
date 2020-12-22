@@ -25,10 +25,9 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.create(post_params)
-    if params["post"]["tags_attributes"] != nil 
-      new_tag = Tag.create(name: params["post"]["tags_attributes"]["name"])
-      PostTag.create(post_id: @post.id, tag_id: new_tag.id)
-    end
+    # params["post"]["tags_attributes"] != nil 
+    new_tag = Tag.create(name: params["post"]["tags_attributes"]["name"])
+    PostTag.create(post_id: @post.id, tag_id: new_tag.id)
     respond_to do |format|
       if @post.valid?
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
